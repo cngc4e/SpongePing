@@ -12,7 +12,7 @@ import com.cngc4e.spongeping.configuration.SPConfig;
 public class ReloadCmd implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        if (SPConfig.getInstance().reload()) {
+        if (SPConfig.getInstance().createAndLoadConfig()) {
             src.sendMessage(Text.of("Plugin reloaded successfully."));
             return CommandResult.success();
         } else {

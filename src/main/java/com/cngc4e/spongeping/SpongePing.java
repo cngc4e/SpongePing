@@ -69,7 +69,7 @@ public class SpongePing {
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
         Task task = Task.builder().execute(new PingTablist())
-                .interval(5, TimeUnit.SECONDS)
+                .interval(SPConfig.TABLIST_UPDATE_INTERVAL, TimeUnit.SECONDS)
                 .submit(this);
     }
 
