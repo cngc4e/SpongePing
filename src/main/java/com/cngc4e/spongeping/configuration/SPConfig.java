@@ -18,6 +18,7 @@ public class SPConfig {
 
     /* Initialize with default config values */
     public static String COMMAND_PING_MESSAGE = "&a[PING] %ping%ms";
+    public static String COMMAND_PING_OTHERS_MESSAGE = "&a[PING] %target%: %ping%ms";
     public static int TABLIST_UPDATE_INTERVAL = 5;
     public static boolean TABLIST_FORCE_UPDATE_PING = true;
 
@@ -49,14 +50,17 @@ public class SPConfig {
                 CommentedConfigurationNode defconfig = configManager.load();
 
                 defconfig.getNode("command", "ping-message")
-                .setValue(SPConfig.COMMAND_PING_MESSAGE)
-                .setComment("Customise the ping message reply. Use %ping% to indicate the ping (in milliseconds).");
+                        .setValue(SPConfig.COMMAND_PING_MESSAGE)
+                        .setComment("Customise the ping message reply.\nUse %ping% to indicate the ping (in milliseconds).");
+                defconfig.getNode("command", "ping-others-message")
+                        .setValue(SPConfig.COMMAND_PING_OTHERS_MESSAGE)
+                        .setComment("Customise the ping message reply when retrieving another player's ping.\nUse %ping% to indicate the ping (in milliseconds) and %target% to indicate the target player.");
                 defconfig.getNode("tablist", "update-interval")
-                .setValue(SPConfig.TABLIST_UPDATE_INTERVAL)
-                .setComment("Sets how frequent the tab list should update (in seconds)");
+                        .setValue(SPConfig.TABLIST_UPDATE_INTERVAL)
+                        .setComment("Sets how frequent the tab list should update (in seconds)");
                 defconfig.getNode("tablist", "force-update-ping")
-                .setValue(SPConfig.TABLIST_FORCE_UPDATE_PING)
-                .setComment("Should the plugin forcefully refresh the pings each time the tab list updates?\nIf false, players' latency will be updated as per normal by the server.");
+                        .setValue(SPConfig.TABLIST_FORCE_UPDATE_PING)
+                        .setComment("Should the plugin forcefully refresh the pings each time the tab list updates?\nIf false, players' latency will be updated as per normal by the server.");
 
                 configManager.save(defconfig);
                 this.logger.info("No existing configuration file was found, created one.");
@@ -69,6 +73,7 @@ public class SPConfig {
             try {
                 ConfigurationNode config = configManager.load();
                 SPConfig.COMMAND_PING_MESSAGE = config.getNode("command", "ping-message").getString(SPConfig.COMMAND_PING_MESSAGE);
+                SPConfig.COMMAND_PING_OTHERS_MESSAGE = config.getNode("command", "ping-others-message").getString(SPConfig.COMMAND_PING_OTHERS_MESSAGE);
                 SPConfig.TABLIST_UPDATE_INTERVAL = config.getNode("tablist", "update-interval").getInt(SPConfig.TABLIST_UPDATE_INTERVAL);
                 SPConfig.TABLIST_FORCE_UPDATE_PING = config.getNode("tablist", "force-update-ping").getBoolean(SPConfig.TABLIST_FORCE_UPDATE_PING);
             } catch (IOException e) {

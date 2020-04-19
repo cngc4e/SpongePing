@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.cngc4e.spongeping</groupId>
     <artifactId>SpongePing</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     
 	<repositories>
 	    <repository>
@@ -22,7 +22,6 @@
 	</dependencies>
 	
 	<build>
-        <finalName>${project.artifactId}</finalName>
         <defaultGoal>clean package install</defaultGoal>
         <plugins>
             <plugin>
