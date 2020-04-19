@@ -25,7 +25,7 @@ public class SPConfig {
     protected SPConfig() {}
 
     public static SPConfig getInstance() {
-        if (instance == null){
+        if (instance == null) {
             instance = new SPConfig();
         }
         return instance;

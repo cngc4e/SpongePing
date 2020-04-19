@@ -30,7 +30,7 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 public class SpongePing {
     @Inject
     private Logger logger;
-    
+
     @Inject
     @DefaultConfig(sharedRoot = true)
     private Path defaultConfig;
@@ -43,9 +43,9 @@ public class SpongePing {
 
     @Listener
     public void preInit(GamePreInitializationEvent event) {
-        this.logger.info("[SpongePing] Version " + PluginInfo.VERSION);
+        this.logger.info("Version " + PluginInfo.VERSION);
     }
-    
+
     @Listener
     public void onInitialization(GameInitializationEvent event) {
         SPConfig cfg = SPConfig.getInstance();
@@ -55,13 +55,9 @@ public class SpongePing {
 
     @Listener
     public void aboutToStart(GameAboutToStartServerEvent event) {
-        Sponge.getCommandManager().register(this, CommandSpec.builder()
-                .permission("spongeping.use")
-                .executor(new PingCmd())
-                .description(Text.of("The main ping command"))
-                .child(CommandSpec.builder()
-                        .executor(new ReloadCmd())
-                        .description(Text.of("Used to reload configuration"))
+        Sponge.getCommandManager().register(this,
+                PingCmd.getCommandBuilder()
+                .child(ReloadCmd.getCommandBuilder()
                         .build(), "reload")
                 .build(), "ping", "sping");
     }

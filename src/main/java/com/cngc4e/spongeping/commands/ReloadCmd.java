@@ -5,6 +5,8 @@ import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
+import org.spongepowered.api.command.spec.CommandSpec;
+import org.spongepowered.api.command.spec.CommandSpec.Builder;
 import org.spongepowered.api.text.Text;
 
 import com.cngc4e.spongeping.configuration.SPConfig;
@@ -19,5 +21,11 @@ public class ReloadCmd implements CommandExecutor {
             src.sendMessage(Text.of("Plugin could not reload."));
             return CommandResult.success();
         }
+    }
+
+    public static Builder getCommandBuilder() {
+        return CommandSpec.builder()
+                .executor(new ReloadCmd())
+                .description(Text.of("Used to reload configuration"));
     }
 }
