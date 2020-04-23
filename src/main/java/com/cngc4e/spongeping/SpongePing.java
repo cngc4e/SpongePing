@@ -66,6 +66,7 @@ public class SpongePing {
     public void onServerStart(GameStartedServerEvent event) {
         Task task = Task.builder().execute(new PingTablist())
                 .interval(SPConfig.TABLIST_UPDATE_INTERVAL, TimeUnit.SECONDS)
+                .async()
                 .submit(this);
     }
 
